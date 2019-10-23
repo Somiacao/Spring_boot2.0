@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,33 +28,7 @@ public class Article {
     private String author;
     private String title;
     private String content;
-    private String createTime;
-    private List<ReaderBean> reader;
+    private Date createTime;
+    private List<Reader> reader;
 
-
-    public static class ReaderBean {
-        /**
-         * name : 曹红梅
-         * age : 16
-         */
-
-        private String name;
-        private int age;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-    }
 }
