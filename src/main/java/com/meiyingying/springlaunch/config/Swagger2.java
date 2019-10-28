@@ -20,7 +20,7 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.meiyingying.springlaunch"))
-                .paths(PathSelectors.regex("/rest/*"))
+                .paths(PathSelectors.regex("/rest/.*"))
                 .build();
     }
 
