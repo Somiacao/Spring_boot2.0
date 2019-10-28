@@ -1,6 +1,7 @@
 package com.meiyingying.springlaunch.model;
 
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
+//改变返回的字符串的顺序
+//@JsonPropertyOrder(value = {"content","title"})
 public class Article {
 
     /**
@@ -25,10 +28,17 @@ public class Article {
      */
 
     private Long id;
+//    为属性起一个别名
+//    @JsonProperty("authorAlia")
     private String author;
     private String title;
     private String content;
+//    对日期进行序列化和反序列化
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+//    如果值为空的话则不进行序列化和反序列化
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date createTime;
+//    @JsonIgnore
     private List<Reader> reader;
 
 }

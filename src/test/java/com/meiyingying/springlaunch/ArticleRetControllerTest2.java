@@ -1,11 +1,14 @@
 package com.meiyingying.springlaunch;
 
-import com.meiyingying.springlaunch.controller.ArticleRestController;
+
+import com.meiyingying.springlaunch.service.ArticleRestService;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -17,15 +20,17 @@ import javax.annotation.Resource;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @Slf4j
+//在容器下进行测试Resource
+@RunWith(SpringRunner.class)
+@AutoConfigureMockMvc
 @SpringBootTest
-public class ArticleRetControllerTest {
+public class ArticleRetControllerTest2 {
 
+    @Resource
     private MockMvc mockMvc;
 
-    @Before
-    public void setUp(){
-        mockMvc = MockMvcBuilders.standaloneSetup(new ArticleRestController()).build();
-    }
+    @Resource
+    ArticleRestService articleRestService;
 
     @Test
     public void saveArticle() throws Exception{

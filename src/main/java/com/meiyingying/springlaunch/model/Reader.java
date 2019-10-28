@@ -1,5 +1,8 @@
 package com.meiyingying.springlaunch.model;
 
+import lombok.Data;
+
+@Data
 public class Reader {
     /**
      * name : 曹红梅

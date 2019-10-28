@@ -2,9 +2,11 @@ package com.meiyingying.springlaunch.controller;
 
 import com.meiyingying.springlaunch.model.AjaxResponse;
 import com.meiyingying.springlaunch.model.Article;
+import com.meiyingying.springlaunch.service.ArticleRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -15,12 +17,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/rest")
 public class ArticleRestController {
 
-    @RequestMapping(value = "/articles", method = POST, produces = "application/json")
-//    @PostMapping(value = "/articles")
+    @Resource
+    ArticleRestService articleRestService;
+
+//    @RequestMapping(value = "/articles", method = POST, produces = "application/json")
+    @PostMapping(value = "/articles")
     public AjaxResponse saveArticle(@RequestBody Article article){
+
+        articleRestService.saveArticle(article);
+
         log.info("saveArticle:{}",article);
 
-        return AjaxResponse.success(article.getId());
+        return AjaxResponse.success(article);
     }
 
     @RequestMapping(value = "/articles/{id}", method = DELETE, produces = "application/json")
