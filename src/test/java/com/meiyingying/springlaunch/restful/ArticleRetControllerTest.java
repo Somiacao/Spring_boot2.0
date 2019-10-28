@@ -1,4 +1,4 @@
-package com.meiyingying.springlaunch;
+package com.meiyingying.springlaunch.restful;
 
 import com.meiyingying.springlaunch.controller.ArticleRestController;
 import lombok.extern.slf4j.Slf4j;

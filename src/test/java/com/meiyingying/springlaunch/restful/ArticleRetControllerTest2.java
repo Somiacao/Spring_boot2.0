@@ -1,41 +1,36 @@
-package com.meiyingying.springlaunch;
+package com.meiyingying.springlaunch.restful;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meiyingying.springlaunch.model.Article;
 import com.meiyingying.springlaunch.service.ArticleRestService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.annotation.Resource;
 
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @Slf4j
 //在容器下进行测试Resource
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@WebMvcTest
-public class ArticleRetControllerTest3 {
+@SpringBootTest
+public class ArticleRetControllerTest2 {
 
     @Resource
     private MockMvc mockMvc;
 
-    @MockBean
+    @Resource
     ArticleRestService articleRestService;
-
 
     @Test
     public void saveArticle() throws Exception{
@@ -47,13 +42,6 @@ public class ArticleRetControllerTest3 {
                 "\"createTime\":\"2019-09-09 12:09:21\",\n"+
                 "\"reader\":[{\"name\":\"张政豪\",\"age\":12},{\"name\":\"曹红梅\",\"age\":12}]"+
                 "}";
-        ObjectMapper objectMapper = new ObjectMapper();
-        Article articleObj = objectMapper.readValue(article, Article.class);
-
-//        打桩
-        when(articleRestService.saveArticle(articleObj)).thenReturn("ok");
-
-
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.request(HttpMethod.POST,"/rest/articles")
                 .contentType("application/json").content(article))
                 .andExpect(MockMvcResultMatchers.status().isOk())
