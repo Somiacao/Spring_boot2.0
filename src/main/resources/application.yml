@@ -4,27 +4,3 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
-    # 1、一个家庭有爸爸妈妈孩子
-    # 2、这个家庭有一个名字（family-name）叫做“happy family”
-    # 3、爸爸有名字和年龄
-    # 4、妈妈有两个别名
-    # 5、孩子除了name和age还有friends的集合
-    # 6、每个friends有两个属性：hobby和sex
-
-family:
-  family-name: "happy family"
-  father:
-    name: meiyingying
-    age: 19
-  mother:
-    alias:
-      - lovly
-      - alis
-  child:
-    name: kebo
-    age: ${family.father.age:5}
-    friends:
-      - hobby: football
-        sex: male
-      - hobby: basketball
-        sex: female
