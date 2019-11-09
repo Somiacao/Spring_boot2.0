@@ -1,7 +1,7 @@
 package com.meiyingying.springlaunch;
 
 
-import com.meiyingying.springlaunch.service.ArticleRestService;
+import com.meiyingying.springlaunch.service.ArticleRestJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.annotation.Resource;
 
@@ -30,7 +29,7 @@ public class ArticleRetControllerTest2 {
     private MockMvc mockMvc;
 
     @Resource
-    ArticleRestService articleRestService;
+    ArticleRestJDBCService articleRestService;
 
     @Test
     public void saveArticle() throws Exception{

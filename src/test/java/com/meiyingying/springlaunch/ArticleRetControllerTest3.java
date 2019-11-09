@@ -3,13 +3,12 @@ package com.meiyingying.springlaunch;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meiyingying.springlaunch.model.Article;
-import com.meiyingying.springlaunch.service.ArticleRestService;
+import com.meiyingying.springlaunch.service.ArticleRestJDBCService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,7 +33,7 @@ public class ArticleRetControllerTest3 {
     private MockMvc mockMvc;
 
     @MockBean
-    ArticleRestService articleRestService;
+    ArticleRestJDBCService articleRestService;
 
 
     @Test
@@ -51,7 +50,7 @@ public class ArticleRetControllerTest3 {
         Article articleObj = objectMapper.readValue(article, Article.class);
 
 //        打桩
-        when(articleRestService.saveArticle(articleObj)).thenReturn("ok");
+        when(articleRestService.saveArticle(articleObj)).thenReturn(articleObj);
 
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.request(HttpMethod.POST,"/rest/articles")
