@@ -6,7 +6,7 @@
 # 6、每个friends有两个属性：hobby和sex
 
 family:
-  family-name: "happy family"
+  family-name: ENC(vbIwDbhELCP7NGqTWwrlFkdxOUiTmrY5)
   father:
     name: meiyingying
     age: 19
