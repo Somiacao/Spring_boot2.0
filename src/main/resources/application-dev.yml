@@ -2,11 +2,46 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-  datasource:
+#  datasource:
+#    primary:
+#      jdbc-url: jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+#      username: ippr
+#      password: Pa$$w0rd
+#      driver-class-name: com.mysql.jdbc.Driver
+#    secondary:
+#      jdbc-url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+#      username: ippr
+#      password: Pa$$w0rd
+#      driver-class-name: com.mysql.jdbc.Driver
+
+
+primarydb:
+  uniqueResourceName: primary
+  xaDataSourceClassName: com.mysql.cj.jdbc.MysqlXADataSource
+  xaProperties:
     url: jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    username: ippr
+    user: ippr
     password: Pa$$w0rd
-    driver-class-name: com.mysql.jdbc.Driver
+  exclusiveConnectionMode: true
+  minPoolSize: 3
+  maxPoolSize: 10
+  testQuery: SELECT 1 from dual
+
+
+secondarydb:
+  uniqueResourceName: secondary
+  xaDataSourceClassName: com.mysql.cj.jdbc.MysqlXADataSource
+  xaProperties:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    user: ippr
+    password: Pa$$w0rd
+  exclusiveConnectionMode: true
+  minPoolSize: 3
+  maxPoolSize: 10
+  testQuery: SELECT 1 from dual
 
 server:
   port: 8080
+
+
+
