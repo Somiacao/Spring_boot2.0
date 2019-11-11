@@ -93,6 +93,12 @@
             <artifactId>spring-boot-starter-jta-atomikos</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+
 
     </dependencies>
 
