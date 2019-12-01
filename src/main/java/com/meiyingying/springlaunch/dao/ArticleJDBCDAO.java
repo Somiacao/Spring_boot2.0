@@ -15,7 +15,8 @@ public class ArticleJDBCDAO {
 
 //    保存文章
     public void save(Article article,JdbcTemplate jdbcTemplate){
-        jdbcTemplate.update("INSERT INTO article(author, title, content, createTime) VALUE(?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO article(id,author, title, content, crete_time) VALUE(?,?,?,?,?)",
+                article.getId(),
                 article.getAuthor(),
                 article.getTitle(),
                 article.getContent(),
@@ -29,7 +30,7 @@ public class ArticleJDBCDAO {
 
 //    更新文章
     public void updateById(Article article,JdbcTemplate jdbcTemplate){
-        jdbcTemplate.update("UPDATE article SET author = ?, title = ?, content = ?, createTime = ?",
+        jdbcTemplate.update("UPDATE article SET author = ?, title = ?, content = ?, crete_time = ?",
                 article.getAuthor(),
                 article.getTitle(),
                 article.getContent(),
