@@ -1,27 +1,32 @@
 package com.meiyingying.springlaunch.controller;
 
 import com.meiyingying.springlaunch.model.AjaxResponse;
-import com.meiyingying.springlaunch.model.Article;
-import com.meiyingying.springlaunch.service.ArticleRestService;
+import com.meiyingying.springlaunch.model.ArticleVO;
+import com.meiyingying.springlaunch.service.ArticleRestJPAService;
+import com.meiyingying.springlaunch.service.ArticleRestJPAServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Slf4j
 //对这个类的所有方法返回json、xml等格式的相应
-@RestController
 @RequestMapping("/rest")
+@Controller
 public class ArticleRestController {
 
-    @Resource
-    ArticleRestService articleRestService;
+    @Resource(name = "articleRestJPAServiceImpl")
+    ArticleRestJPAService articleRestJPAService;
 
     @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Articles", httpMethod = "POST")
     @ApiResponses({
@@ -31,29 +36,31 @@ public class ArticleRestController {
     })
     @RequestMapping(value = "/articles", method = POST, produces = "application/json")
 //    @PostMapping(value = "/articles")
-    public AjaxResponse saveArticle(@RequestBody Article article){
+    public AjaxResponse saveArticle(@RequestBody ArticleVO articleVO){
 
-        articleRestService.saveArticle(article);
+        articleRestJPAService.save(articleVO);
 
-        log.info("saveArticle:{}",article);
+        log.info("saveArticle:{}", articleVO);
 
-        return AjaxResponse.success(article);
+        return AjaxResponse.success(articleVO);
     }
 
     @RequestMapping(value = "/articles/{id}", method = DELETE, produces = "application/json")
 //    @DeleteMapping(value = "/articles/{id}")
     public AjaxResponse deleteArticle(@PathVariable Long id){
         log.info("deleteArticle:{}"+id);
+        articleRestJPAService.deleteArticle(id);
 
         return AjaxResponse.success(id);
     }
 
     @RequestMapping(value = "/articles/{id}", method = PUT, produces = "application/json")
 //    @PutMapping(value = "/articles/{id}")
-    public AjaxResponse updateArticle(@PathVariable Long id, @RequestBody Article article){
-        article.setId(id);
+    public AjaxResponse updateArticle(@PathVariable Long id, @RequestBody ArticleVO articleVO){
+        articleVO.setId(id);
 
-        log.info("updateArticle:{}",article);
+        log.info("updateArticle:{}", articleVO);
+        articleRestJPAService.updateArticle(articleVO);
 
         return AjaxResponse.success(id);
     }
@@ -62,12 +69,22 @@ public class ArticleRestController {
 //    @GetMapping(value = "/articles/{id}")
     public AjaxResponse getArticle(@PathVariable Long id){
 
-        Article article = Article.builder().id(1L).author("梅嘤嘤").content("Springboot学习疗法").createTime(new Date()).title("Springboot").build();
+//        ArticleVO articleVO = ArticleVO.builder().id(1L).author("梅嘤嘤").content("Springboot学习疗法").createTime(new Date()).title("Springboot").build();
 
-        log.info("getArticle:{}",article);
+        ArticleVO articleVO = articleRestJPAService.getArticle(id);
+        log.info("getArticle:{}", articleVO);
 
-        return AjaxResponse.success(id);
+        return AjaxResponse.success(articleVO);
     }
+
+    @GetMapping(value = "/articles")
+    public AjaxResponse getAll(){
+        List<ArticleVO> ArticleList = articleRestJPAService.getAll();
+        return AjaxResponse.success(ArticleList);
+    }
+
+
+
 
 
 }

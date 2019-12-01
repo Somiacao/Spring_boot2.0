@@ -6,17 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
+@Data
+//@Repository
 //改变返回的字符串的顺序
 //@JsonPropertyOrder(value = {"content","title"})
-public class Article {
+public class ArticleVO {
 
     /**
      * id : 1
