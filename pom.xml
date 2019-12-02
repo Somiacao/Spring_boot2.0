@@ -8,10 +8,10 @@
         <version>2.0.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.zimug</groupId>
-    <artifactId>boot-launch</artifactId>
+    <groupId>com.meiyingying</groupId>
+    <artifactId>springlaunch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>boot-launch</name>
+    <name>springlaunch</name>
     <description>Spring Boot 2 learing</description>
 
     <properties>
@@ -60,9 +60,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jta-atomikos</artifactId>
         </dependency>
-
-
-
 
 
         <dependency>

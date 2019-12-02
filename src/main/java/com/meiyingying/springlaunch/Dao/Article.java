@@ -31,6 +31,6 @@ public class Article{
     @Column(length = 512)
     private String content;
 
-    private Date creteTime;
+    private Date createTime;
 
 }
