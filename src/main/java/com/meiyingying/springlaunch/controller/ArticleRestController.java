@@ -31,33 +31,33 @@ public class ArticleRestController {
     })
     @RequestMapping(value = "/articles", method = POST, produces = "application/json")
 //    @PostMapping(value = "/articles")
-    public AjaxResponse saveArticle(@RequestBody Article article){
+    public @ResponseBody AjaxResponse saveArticle(@RequestBody Article article){
         articleRestService.saveArticle(article);
         return AjaxResponse.success(article);
     }
 
     @RequestMapping(value = "/articles/{id}", method = DELETE, produces = "application/json")
 //    @DeleteMapping(value = "/articles/{id}")
-    public AjaxResponse deleteArticle(@PathVariable Long id){
+    public @ResponseBody AjaxResponse deleteArticle(@PathVariable Long id){
         articleRestService.deleteArticle(id);
         return AjaxResponse.success(id);
     }
 
     @RequestMapping(value = "/articles/{id}", method = PUT, produces = "application/json")
 //    @PutMapping(value = "/articles/{id}")
-    public AjaxResponse updateArticle(@PathVariable Long id, @RequestBody Article article){
+    public @ResponseBody  AjaxResponse updateArticle(@PathVariable Long id, @RequestBody Article article){
         articleRestService.updateArticle(article);
         return AjaxResponse.success(article);
     }
 
     @RequestMapping(value = "/articles/{id}", method = GET, produces = "application/json")
 //    @GetMapping(value = "/articles/{id}")
-    public AjaxResponse getArticle(@PathVariable Long id){
+    public @ResponseBody AjaxResponse getArticle(@PathVariable Long id){
         return AjaxResponse.success(articleRestService.getArticle(id));
     }
 
     @RequestMapping(value = "/articles", method = GET, produces = "application/json")
-    public AjaxResponse getAll(){
+    public @ResponseBody AjaxResponse getAll(){
         return AjaxResponse.success(articleRestService.getAll());
     }
 

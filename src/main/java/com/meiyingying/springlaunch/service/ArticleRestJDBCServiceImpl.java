@@ -24,11 +24,11 @@ public class ArticleRestJDBCServiceImpl implements ArticleRestJDBCService{
     @Resource
     JdbcTemplate secondaryJdbcTemplate;
 
-    @Transactional
+//    @Transactional
     @Override
     public Article saveArticle(Article article) {
         articleJDBCDAO.save(article,primaryJdbcTemplate);
-        articleJDBCDAO.save(article,secondaryJdbcTemplate);
+//        articleJDBCDAO.save(article,secondaryJdbcTemplate);
 //        int a = 2/0;
 ////        System.out.println(a);
         return article;

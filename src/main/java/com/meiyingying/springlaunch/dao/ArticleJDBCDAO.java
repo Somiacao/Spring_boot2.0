@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Repository
@@ -15,7 +14,7 @@ public class ArticleJDBCDAO {
 
 //    保存文章
     public void save(Article article,JdbcTemplate jdbcTemplate){
-        jdbcTemplate.update("INSERT INTO article(id,author, title, content, crete_time) VALUE(?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO article(id, author, title, content, create_time) VALUE(?,?,?,?,?)",
                 article.getId(),
                 article.getAuthor(),
                 article.getTitle(),
@@ -30,11 +29,12 @@ public class ArticleJDBCDAO {
 
 //    更新文章
     public void updateById(Article article,JdbcTemplate jdbcTemplate){
-        jdbcTemplate.update("UPDATE article SET author = ?, title = ?, content = ?, crete_time = ?",
+        jdbcTemplate.update("UPDATE article SET author = ?, title = ?, content = ?, create_time = ? WHERE id = ?",
                 article.getAuthor(),
                 article.getTitle(),
                 article.getContent(),
-                article.getCreateTime());
+                article.getCreateTime(),
+                article.getId());
     }
 
 //    根据id查找文章
